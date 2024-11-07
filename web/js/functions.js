@@ -12,6 +12,10 @@ $(document).ready(function() {
         $('#popup').fadeOut(); // Плавно скрываем модальное окно
     });
 
+    function showNotification() {
+        $('#success').fadeIn().delay(2000).fadeOut();
+    }
+
     // Используем делегирование событий
     $('.main').on('click', '.delete', function() {
         const id = $(this).attr("id").split("_")[0];
@@ -48,6 +52,7 @@ $(document).ready(function() {
             type: 'GET',
             success: function(res) {
                 console.log('Оффер успешно удалён:', res);
+                showNotification();
             },
             error: function() {
                 console.error('Ошибка при удалении оффера:');
@@ -269,6 +274,7 @@ $(document).ready(function() {
         else {
             $('#edit_name').addClass('red');
             $('#edit_name').removeClass('black');
+            $('#edit_name').attr('placeholder', 'Enter the name');
         }
         if ($('#edit_email').val() != '') {
             point = point + 1;
@@ -278,6 +284,7 @@ $(document).ready(function() {
         else {
             $('#edit_email').addClass('red');
             $('#edit_email').removeClass('black');
+            $('#edit_email').attr('placeholder', 'Enter the email');
         }
         if ($('#edit_phone').val() != '') {
             point = point + 1;
@@ -287,6 +294,7 @@ $(document).ready(function() {
         else {
             $('#edit_phone').addClass('red');
             $('#edit_phone').removeClass('black');
+            $('#edit_phone').attr('placeholder', 'Enter the phone');
         }
         if ($('#edit_date').val() != '') {
             point = point + 1;
@@ -296,6 +304,7 @@ $(document).ready(function() {
         else {
             $('#edit_date').addClass('red');
             $('#edit_date').removeClass('black');
+            $('#edit_date').attr('placeholder', 'Enter the date');
         }
         if (point == 4) {
             $.ajax({
@@ -310,6 +319,7 @@ $(document).ready(function() {
             type: 'GET',
             success: function(res) {
                 console.log('Оффер был успешно изменён:', res);
+                showNotification();
             },
             error: function() {
                 console.error('Ошибка при изменении оффера:');
@@ -339,6 +349,7 @@ $(document).ready(function() {
         else {
             $('#name').addClass('red');
             $('#name').removeClass('black');
+            $('#name').attr('placeholder', 'Enter the name');
         }
         if ($('#email').val() != '') {
             point = point + 1;
@@ -348,6 +359,7 @@ $(document).ready(function() {
         else {
             $('#email').addClass('red');
             $('#email').removeClass('black');
+            $('#email').attr('placeholder', 'Enter the email');
         }
         if ($('#phone').val() != '') {
             point = point + 1;
@@ -357,6 +369,7 @@ $(document).ready(function() {
         else {
             $('#phone').addClass('red');
             $('#phone').removeClass('black');
+            $('#phone').attr('placeholder', 'Enter the phone');
         }
         console.log(point);
         if (point == 3) {
@@ -384,6 +397,7 @@ $(document).ready(function() {
                         
                         // Добавляем HTML в контейнер
                         $('.main').append(offerHtml);
+                    showNotification();
                 },
                 error: function() {
                     console.error('Ошибка при создании Оффер:');

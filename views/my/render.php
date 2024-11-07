@@ -89,7 +89,6 @@
         </div>
         <div id="success">
             <h1>Query is successful!</h1>
-            <button>Close</button>
         </div>
         
     </center>
