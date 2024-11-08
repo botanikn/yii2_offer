@@ -1,10 +1,12 @@
 <?php
 
 namespace app\models;
+use Yii;
+use yii\base\Model;
 
 use yii\db\ActiveRecord;
 
-class Offers extends ActiveRecord {
+class Edit extends ActiveRecord {
 
     public static function tableName(){
         return 'offers';
@@ -20,11 +22,11 @@ class Offers extends ActiveRecord {
     //     ];
 
     // }
-    public static function createOffer($offerName, $email, $phone)
+    public static function updateOffer($id, $offerName, $email, $phone, $createdDate)
     {
-        $createdDate = date('Y-m-d');
         
-        $sql = "INSERT INTO offers (`OfferName`, `Email`, `PhoneNumber`, `CreationDate`) VALUES ('$offerName', '$email', '$phone', '$createdDate')";
+        $sql = "UPDATE offers SET `OfferName` = '$offerName', `Email` = '$email', `PhoneNumber` = '$phone', `CreationDate` = '$createdDate' 
+                WHERE `ID` = $id";
         $command = Yii::$app->db->createCommand($sql);
         
         return $command->execute();

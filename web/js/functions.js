@@ -245,31 +245,31 @@ $(document).ready(function() {
         console.log(point);
         if (point == 4) {
             $.ajax({
-            url: 'index.php?r=my/edit',
-            data:{
-                id: loc_id,
-                name: $('#edit_name').val(),
-                email: $('#edit_email').val(),
-                phone: $('#edit_phone').val(),
-                date: $('#edit_date').val()
-            },
-            type: 'GET',
-            success: function(res) {
-                console.log('Оффер был успешно изменён:', res);
-                showNotification();
-            },
-            error: function() {
-                console.error('Ошибка при изменении оффера:');
-            }
-        });
+                url: 'index.php?r=my/edit',
+                data:{
+                    id: loc_id,
+                    name: $('#edit_name').val(),
+                    email: $('#edit_email').val(),
+                    phone: $('#edit_phone').val(),
+                    date: $('#edit_date').val()
+                },
+                type: 'GET',
+                success: function(res) {
+                    console.log('Оффер был успешно изменён:', res);
+                    console.log($('#edit_date').val());
+                    $('.' + loc_id + 'offername').text('Name - ' + $('#edit_name').val());
+                    $('.' + loc_id + 'email').text('Email - ' + $('#edit_email').val());
+                    $('.' + loc_id + 'number').text('Number - ' + $('#edit_phone').val());
+                    $('.' + loc_id + 'date').text('Date - ' + $('#edit_date').val());
 
-        $('.' + loc_id + "offername").text($('#edit_name').val());
-        $('.' + loc_id + "email").text($('#edit_email').val());
-        $('.' + loc_id + "phone").text($('#edit_phone').val());
-        $('.' + loc_id + "date").text($('#edit_date').val());
-
-        $('#overlay').fadeOut(); // Закрываем оверлей
-        $('#edit_popup').fadeOut(); // Закрываем окно после отправки
+                    $('#overlay').fadeOut(); // Закрываем оверлей
+                    $('#edit_popup').fadeOut(); // Закрываем окно после отправки
+                    showNotification();
+                },
+                error: function() {
+                    console.error('Ошибка при изменении оффера:');
+                }
+            });
         }
 
     })

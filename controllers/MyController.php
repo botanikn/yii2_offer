@@ -5,6 +5,7 @@ namespace app\controllers;
 use yii\web\Controller;
 use app\models\Edit;
 use app\models\Offers;
+use app\models\Add;
 use Yii;
 use yii\data\Pagination;
 use app\controllers\ArrayHelpers;
@@ -56,11 +57,15 @@ class MyController extends Controller{
         $phone = $_GET['phone'];
         $createdDate = $_GET['date'];
 
-        $offer = Offers::findOne($id); // Выборка нужного оффера
+        $offer = new Edit();
 
-        $sql = "UPDATE offers SET `OfferName` = '$offerName', `Email` = '$email', `PhoneNumber` = '$phone', `CreationDate` = '$createdDate' 
-                WHERE `ID` = $id";
-        $command = Yii::$app->db->createCommand($sql)->execute(); // Изменение оффера
+        $getoffers = $offer->updateOffer($id, $offerName, $email, $phone, $createdDate);
+
+        // $offer = Offers::findOne($id); // Выборка нужного оффера
+
+        // $sql = "UPDATE offers SET `OfferName` = '$offerName', `Email` = '$email', `PhoneNumber` = '$phone', `CreationDate` = '$createdDate' 
+        //         WHERE `ID` = $id";
+        // $command = Yii::$app->db->createCommand($sql)->execute(); // Изменение оффера
         
     }
 
@@ -74,13 +79,11 @@ class MyController extends Controller{
             $phone= $_POST['phone'];
 
             $createdDate = date('Y-m-d'); // Переменная с текущей датой
-            $sql = "INSERT INTO offers (`OfferName`, `Email`, `PhoneNumber`, `CreationDate`) VALUES ('$offerName', '$email', '$phone', '$createdDate')";
-            $command = Yii::$app->db->createCommand($sql)->execute(); // Исполнение запроса добавления в БД нового оффера
+            
+            $offer = new Add();
+            $getoffers = $offer->addOffer($offerName, $email, $phone, $createdDate);
 
-            $select = Yii::$app->db->createCommand("SELECT * FROM offers WHERE `ID` = (SELECT MAX(`ID`) FROM offers)") // Выборка созданного оффера
-            ->queryAll();;
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            return $select;
+            return $getoffers;
         }
     }
 
