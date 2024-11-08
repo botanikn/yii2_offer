@@ -13,8 +13,30 @@ $(document).ready(function() {
         $('#popup').fadeOut(); // Плавно скрываем модальное окно
     });
 
+    // Всплывающее уведомление об успешной операции
     function showNotification() {
         $('#success').fadeIn().delay(2000).fadeOut();
+    }
+
+    // Класс содержащий шаблон для создания оффера
+    class Offer {
+        constructor(offer) {
+            this.offer = offer;
+        }
+        generateHtml() {
+            return `<center>
+                        <div class="offer" id="${this.offer.ID}_offer">
+                            <span> ID - ${this.offer.ID}</span>
+                            <span class="${this.offer.ID}offername"> Name - ${this.offer.OfferName}</span>
+                            <span class="${this.offer.ID}email"> Email - ${this.offer.Email}</span>
+                            <span class="${this.offer.ID}number"> Number - ${this.offer.PhoneNumber}</span>
+                            <span class="${this.offer.ID}date"> Date - ${this.offer.CreationDate}</span>
+                            <button id="${this.offer.ID}_delete" class="delete">Удалить</button>
+                            <button id="${this.offer.ID}_edit" class="edit">Редактировать</button>
+                            <br>
+                        </div>
+                    </center>`;
+        }
     }
 
     // Используем делегирование событий
@@ -62,6 +84,7 @@ $(document).ready(function() {
         $("#" + id + "_offer").hide();
     });
 
+    // Сокрытие popup
     $('#editclosePopup, #overlay').on('click', function() {
         $('#overlay').fadeOut(); // Плавно скрываем оверлей
         $('#edit_popup').fadeOut(); // Плавно скрываем модальное окно
@@ -94,19 +117,8 @@ $(document).ready(function() {
                 console.log(typeof res)
                 $('.main').empty(); // Очищаем контейнер перед добавлением новых предложений
                 for(let i = 0; i < res.offers.length; i++) {
-                    let offerHtml = '<center><div class="offer" id="' + res.offers[i].ID + '_offer">' +
-                        '<span> ID - ' + res.offers[i].ID + '</span>' +
-                        '<span class="' + res.offers[i].ID + 'offername"> Name - ' + res.offers[i].OfferName + '</span>' +
-                        '<span class="' + res.offers[i].ID + 'email"> Email - ' + res.offers[i].Email + '</span>' +
-                        '<span class="' + res.offers[i].ID + 'number"> Number - ' + res.offers[i].PhoneNumber + '</span>' +
-                        '<span class="' + res.offers[i].ID + 'date"> Date - ' + res.offers[i].CreationDate + '</span>' +
-                        '<button id="' + res.offers[i].ID + '_delete" class="delete">Удалить</button>' +
-                        '<button id="' + res.offers[i].ID + '_edit" class="edit">Редактировать</button>' +
-                        '<br>' +
-                        '</div></center>';
-                    
-                    // Добавляем HTML в контейнер
-                    $('.main').append(offerHtml);
+                    let offer = new Offer(res.offers[i]); // Создаем экземпляр Offer
+                    $('.main').append(offer.generateHtml());
                 }
                 // Создаем кнопки для навигации по страницам
                 createPagination(res.totalPages);
@@ -155,19 +167,8 @@ $(document).ready(function() {
                 offersArray.sort((a, b) => a.OfferName.localeCompare(b.OfferName)); // Сортируем массив по имени предложения
                 
                 for (let i = 0; i < offersArray.length; i++) {
-                    let offerHtml = '<center><div class="offer" id="' + offersArray[i].ID + '_offer">' +
-                        '<span> ID - ' + offersArray[i].ID + '</span>' +
-                        '<span class="' + offersArray[i].ID + 'offername"> Name - ' + offersArray[i].OfferName + '</span>' +
-                        '<span class="' + offersArray[i].ID + 'email"> Email - ' + offersArray[i].Email + '</span>' +
-                        '<span class="' + offersArray[i].ID + 'number"> Number - ' + offersArray[i].PhoneNumber + '</span>' +
-                        '<span class="' + offersArray[i].ID + 'date"> Date - ' + offersArray[i].CreationDate + '</span>' +
-                        '<button id="' + offersArray[i].ID + '_delete" class="delete">Удалить</button>' +
-                        '<button id="' + offersArray[i].ID + '_edit" class="edit">Редактировать</button>' +
-                        '<br>' +
-                        '</div></center>';
-                    
-                    // Добавляем HTML в контейнер
-                    $('.main').append(offerHtml);
+                    let offer = new Offer(offersArray[i]); // Создаем экземпляр Offer
+                    $('.main').append(offer.generateHtml());
                 }
                 // Создаем кнопки для навигации по страницам
                 createPagination(res.totalPages);
@@ -198,19 +199,8 @@ $(document).ready(function() {
                 offersArray.sort((a, b) => a.ID - b.ID);
 
                 for (let i = 0; i < offersArray.length; i++) {
-                    let offerHtml = '<center><div class="offer" id="' + offersArray[i].ID + '_offer">' +
-                        '<span> ID - ' + offersArray[i].ID + '</span>' +
-                        '<span class="' + offersArray[i].ID + 'offername"> Name - ' + offersArray[i].OfferName + '</span>' +
-                        '<span class="' + offersArray[i].ID + 'email"> Email - ' + offersArray[i].Email + '</span>' +
-                        '<span class="' + offersArray[i].ID + 'number"> Number - ' + offersArray[i].PhoneNumber + '</span>' +
-                        '<span class="' + offersArray[i].ID + 'date"> Date - ' + offersArray[i].CreationDate + '</span>' +
-                        '<button id="' + offersArray[i].ID + '_delete" class="delete">Удалить</button>' +
-                        '<button id="' + offersArray[i].ID + '_edit" class="edit">Редактировать</button>' +
-                        '<br>' +
-                        '</div></center>';
-                    
-                    // Добавляем HTML в контейнер
-                    $('.main').append(offerHtml);
+                    let offer = new Offer(offersArray[i]); // Создаем экземпляр Offer
+                    $('.main').append(offer.generateHtml());
                 }
                 // Создаем кнопки для навигации по страницам
                 createPagination(res.totalPages);
@@ -303,19 +293,8 @@ $(document).ready(function() {
                 type: 'POST',
                 success: function(res) {
                     console.log('Оффер успешно создан:', res);
-                    let offerHtml = '<center><div class="offer" id="' + res[0].ID + '_offer">' +
-                            '<span> ID - ' + res[0].ID + '</span>' +
-                            '<span class="' + res[0].ID + 'offername"> Name - ' + res[0].OfferName + '</span>' +
-                            '<span class="' + res[0].ID + 'email"> Email - ' + res[0].Email + '</span>' +
-                            '<span class="' + res[0].ID + 'number"> Number - ' + res[0].PhoneNumber + '</span>' +
-                            '<span class="' + res[0].ID + 'date"> Date - ' + res[0].CreationDate + '</span>' +
-                            '<button id="' + res[0].ID + '_delete" class="delete">Удалить</button>' +
-                            '<button id="' + res[0].ID + '_edit" class="edit">Редактировать</button>' +
-                            '<br>' +
-                            '</div></center>';
-                        
-                        // Добавляем HTML в контейнер
-                        $('.main').append(offerHtml);
+                    let offer = new Offer(res[0]); // Создаем экземпляр Offer
+                    $('.main').append(offer.generateHtml());
                     showNotification();
                 },
                 error: function() {
