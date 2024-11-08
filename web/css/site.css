@@ -5,8 +5,8 @@
 }
 
 body {
-    background-color: #921bb7;
-    font-family: serif;
+    background-color: rgb(82, 74, 134);
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .all {
@@ -15,10 +15,14 @@ body {
 
 }
 
+#title {
+    color: white;
+}
+
 .left {
     border-top: 1px black solid;
     padding-top: 10px;
-    background-color: #E4BBF1;
+    background-color: #cdcbe0;
     border-top-right-radius: 24px;
 }
 
@@ -43,12 +47,16 @@ body {
 
 #par {
     padding: 5px;
+    color: white;
+    background-color: rgb(82, 74, 134);
 }
 #search_value {
     padding: 5px;
 }
 #search_button {
     padding: 5px;
+    color: white;
+    background-color: rgb(82, 74, 134);
 }
 .sort {
     margin-right: 24px;
@@ -56,11 +64,16 @@ body {
 #id_sort {
     padding: 5px;
     float: right;
+    margin-left: 5px;
+    background-color: rgb(82, 74, 134);
+    color: white;
 }
 #name_sort {
     padding: 5px;
     float: right;
     border-right: none;
+    background-color: rgb(82, 74, 134);
+    color: white;
 }
 
 
@@ -89,12 +102,14 @@ body {
     .edit {
         margin: 10px;
         border-radius: 16px;
-        background-color: #D270F1;
+        background-color: #9e97ca;
+        font-weight: bold;
     }
     .delete {
         margin: 10px;
         border-radius: 16px;
-        background-color: #D270F1;
+        background-color: #9e97ca;
+        font-weight: bold;
     }
 
 /* Стиль для каждой строчке в оффере */
@@ -119,7 +134,8 @@ span {
     margin-left: 10px;
     padding: 10px;
     border-radius: 24px;
-    background-color: #E4BBF1;
+    background-color: #cdcbe0;
+    font-weight: bold;
 }
 
 /*Стиль для оверлея, который затемняет и делает всю страницу кроме popup'а неактивной*/

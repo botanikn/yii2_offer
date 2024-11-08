@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <center><h1>OFFERS</h1></center>
+    <center><h1 id="title">OFFERS</h1></center>
     <div class="all">
         <div class="left">
             <div class="head">
@@ -47,7 +47,7 @@
             </div>
         </div>
         <div class="right">
-            <button class="create">CREATE AN OFFER</buttom>
+            <button class="create">Create an offer</buttom>
         </div>
     </div>
     <center>
