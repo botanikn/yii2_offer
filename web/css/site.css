@@ -119,6 +119,56 @@ span {
 }
 
 
+
+.need_grid {
+    display: grid;
+}
+
+.first_span {
+    grid-column: 1;
+    grid-row: 1;
+    margin-right: 5px;
+}
+.second_span {
+    grid-column: 1;
+    grid-row: 2;
+}
+.third_span {
+    grid-column: 1;
+    grid-row: 3;
+}
+.fourth_span {
+    grid-column: 1;
+    grid-row: 4;
+}
+
+.first_input {
+    grid-column: 2;
+    grid-row: 1;
+    margin-bottom: 5px;
+}
+.second_input {
+    grid-column: 2;
+    grid-row: 2;
+    margin-bottom: 5px;
+}
+.third_input {
+    grid-column: 2;
+    grid-row: 3;
+    margin-bottom: 5px;
+}
+.fourth_input {
+    grid-column: 2;
+    grid-row: 4;
+    margin-bottom: 5px;
+}
+
+.send_buttons {
+    color: white;
+    background-color: rgb(82, 74, 134);
+}
+
+
 /* Стиль для страниц */
 .paginator {
     display: flex;
@@ -154,7 +204,7 @@ span {
 #popup {
     display: none; /* Скрываем модальное окно по умолчанию */
     padding: 20px;
-    background-color: white;
+    background-color: #cdcbe0;
     border: 1px solid #ccc;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     position: fixed; /* Фиксированное позиционирование */
@@ -167,7 +217,7 @@ span {
 #edit_popup {
     display: none; /* Скрываем модальное окно по умолчанию */
     padding: 20px;
-    background-color: white;
+    background-color: #cdcbe0;
     border: 1px solid #ccc;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     position: fixed; /* Фиксированное позиционирование */

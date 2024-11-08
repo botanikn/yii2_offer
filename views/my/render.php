@@ -64,28 +64,32 @@
 
         <div id="edit_popup">
             <h2>Enter the changes</h2>
-                <label for="edit_name">Offer Name:</label>
-                <input type="text" id="edit_name" required><br><br>
-                <label for="edit_email">Email:</label>
-                <input type="email" id="edit_email" required><br><br>
-                <label for="edit_phone">Phone:</label>
-                <input type="phone" id="edit_phone" required><br><br>
-                <label for="edit_date">Date:</label>
-                <input type="date" id="edit_date" required><br><br>
-                <button class="form_button" id="edit">Отправить</button>
-                <button type="button" id="editclosePopup" class="form_button">Закрыть</button>
+                <div class="need_grid">
+                    <span class="first_span">Offer Name:</span>
+                    <span class="second_span">Email:</span>
+                    <span class="third_span">Phone:</span>
+                    <span class="fourth_span">Date:</span>
+                    <input type="text" id="edit_name" class="first_input" required><br><br>
+                    <input type="email" id="edit_email" class="second_input" required><br><br>
+                    <input type="phone" id="edit_phone" class="third_input" required><br><br>
+                    <input type="date" id="edit_date" class="fourth_input" required><br><br>
+                </div>
+                <button class="form_button send_buttons" id="edit">Отправить</button>
+                <button type="button" id="editclosePopup" class="form_button send_buttons">Закрыть</button>
         </div>
 
         <div id="popup">
             <h2>Offer creation</h2>
-                <label for="name">Offer Name:</label>
-                <input type="text" id="name" required><br><br>
-                <label for="email">Email:</label>
-                <input type="email" id="email" required><br><br>
-                <label for="email">Phone:</label>
-                <input type="phone" id="phone" required><br><br>
-                <button class="form_button" id="post">Отправить</button>
-                <button type="button" id="closePopup" class="form_button">Закрыть</button>
+                <div class="need_grid">
+                    <span class="first_span">Offer Name:</span>
+                    <input type="text" id="name" class="first_input" required><br><br>
+                    <span class="second_span">Email:</span>
+                    <input type="email" id="email" class="second_input" required><br><br>
+                    <span class="third_span">Phone:</span>
+                    <input type="phone" id="phone" class="third_input" required><br><br>
+                </div>
+                <button class="form_button send_buttons" id="post">Отправить</button>
+                <button type="button" id="closePopup" class="form_button send_buttons">Закрыть</button>
         </div>
         <div id="success">
             <h1>Query is successful!</h1>
