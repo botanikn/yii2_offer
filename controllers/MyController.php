@@ -6,6 +6,7 @@ use yii\web\Controller;
 use app\models\Edit;
 use app\models\Offers;
 use app\models\Add;
+use app\models\Filtre;
 use Yii;
 use yii\data\Pagination;
 use app\controllers\ArrayHelpers;
@@ -95,17 +96,15 @@ class MyController extends Controller{
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Текущая страница
         $limit = 10; // Количество элементов на странице
         $offset = ($page - 1) * $limit; // Смещение для запроса
-        $offers = Yii::$app->db->createCommand("SELECT * FROM offers WHERE `$par` LIKE :value LIMIT :limit OFFSET :offset")
-            ->bindValue(':value', "%$value%")
-            ->bindValue(':limit', $limit)
-            ->bindValue(':offset', $offset)
-            ->queryAll();
-        // Получаем общее количество предложений для расчета количества страниц
-        $totalCount = Yii::$app->db->createCommand("SELECT COUNT(*) FROM offers WHERE `$par` LIKE :value")
-            ->bindValue(':value', "%$value%")
-            ->queryScalar();
-        // Устанавливаем заголовок ответа как JSON и возвращаем массив с предложениями и общей информацией
+        
+        $offer_std = new Filtre();
+
+        $offers = $offer_std->filtreOffer($par, $value, $limit, $offset);
+        $totalCount = $offer_std->countOffer($par, $value);
+
+        // Формируем ответ в json формате
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
         return [
             'offers' => $offers,
             'totalCount' => $totalCount,
