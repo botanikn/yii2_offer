@@ -4,19 +4,27 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color: #921bb7;
+    font-family: serif;
+}
+
 .all {
     display: grid;
     grid-template-columns: 90% 10%;
+
 }
 
 .left {
     border-top: 1px black solid;
     padding-top: 10px;
+    background-color: #E4BBF1;
+    border-top-right-radius: 24px;
 }
 
-.right {
+/* .right {
     border-left: 1px black solid;
-}
+} */
 
 .head {
     display: grid;
@@ -81,12 +89,12 @@
     .edit {
         margin: 10px;
         border-radius: 16px;
-        background-color: plum;
+        background-color: #D270F1;
     }
     .delete {
         margin: 10px;
         border-radius: 16px;
-        background-color: red;
+        background-color: #D270F1;
     }
 
 /* Стиль для каждой строчке в оффере */
@@ -111,7 +119,7 @@ span {
     margin-left: 10px;
     padding: 10px;
     border-radius: 24px;
-    background-color: green;
+    background-color: #E4BBF1;
 }
 
 /*Стиль для оверлея, который затемняет и делает всю страницу кроме popup'а неактивной*/

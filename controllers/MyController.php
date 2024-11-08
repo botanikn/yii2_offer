@@ -34,6 +34,7 @@ class MyController extends Controller{
         return $this->render('render', compact('getoffers', 'pag'));
     }
 
+    // Метод для удаления оффера
     public function actionDelete() {
         
         $id = $_GET['id'];
@@ -46,6 +47,7 @@ class MyController extends Controller{
         
     }
 
+    // Метод для изменения оффера
     public function actionEdit() {
 
         $id = $_GET['id'];
@@ -54,14 +56,15 @@ class MyController extends Controller{
         $phone = $_GET['phone'];
         $createdDate = $_GET['date'];
 
-        $offer = Offers::findOne($id);
+        $offer = Offers::findOne($id); // Выборка нужного оффера
 
         $sql = "UPDATE offers SET `OfferName` = '$offerName', `Email` = '$email', `PhoneNumber` = '$phone', `CreationDate` = '$createdDate' 
                 WHERE `ID` = $id";
-        $command = Yii::$app->db->createCommand($sql)->execute();
+        $command = Yii::$app->db->createCommand($sql)->execute(); // Изменение оффера
         
     }
 
+    // Метод для создания оффера
     public function actionAdd() {
         
         if (Yii::$app->request->isPost) {
@@ -70,17 +73,18 @@ class MyController extends Controller{
             $email = $_POST['email'];
             $phone= $_POST['phone'];
 
-            $createdDate = date('Y-m-d');
+            $createdDate = date('Y-m-d'); // Переменная с текущей датой
             $sql = "INSERT INTO offers (`OfferName`, `Email`, `PhoneNumber`, `CreationDate`) VALUES ('$offerName', '$email', '$phone', '$createdDate')";
-            $command = Yii::$app->db->createCommand($sql)->execute();
+            $command = Yii::$app->db->createCommand($sql)->execute(); // Исполнение запроса добавления в БД нового оффера
 
-            $select = Yii::$app->db->createCommand("SELECT * FROM offers WHERE `ID` = (SELECT MAX(`ID`) FROM offers)")
+            $select = Yii::$app->db->createCommand("SELECT * FROM offers WHERE `ID` = (SELECT MAX(`ID`) FROM offers)") // Выборка созданного оффера
             ->queryAll();;
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             return $select;
         }
     }
 
+    // Метод для фильтрации офферов
     public function actionFiltre() {
         
         $par = $_GET['par'];
@@ -105,21 +109,6 @@ class MyController extends Controller{
             'totalPages' => ceil($totalCount / $limit),
             'currentPage' => $page,
         ];
-
-        // $par = $_GET['par'];
-        // $value = $_GET['value'];
-
-        // $offers = Yii::$app->db->createCommand("SELECT * FROM offers WHERE `$par` LIKE '%$value%'")->queryAll();
-        // Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        // return $offers;
-    }
-
-    public function actionIndex() {
-
-        $hello = 'Hello';
-        $names = ['Ivanov', 'Letov', 'Lenin'];
-        // return $this->render('index', ['hello' => $hello, 'names' => $names]);
-        return $this->render('index', compact('hello', 'names'));
 
     }
 

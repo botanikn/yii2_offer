@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
     let loc_id;
+    let point = 0;
 
     $('.create').on('click', function() {
         $('#overlay').fadeIn(); // Плавно показываем оверлей
@@ -169,26 +170,12 @@ $(document).ready(function() {
                     $('.main').append(offerHtml);
                 }
                 // Создаем кнопки для навигации по страницам
-                createPaginationSort(res.totalPages);
+                createPagination(res.totalPages);
             },
             error: function() {
                 console.error('Ошибка при загрузке предложений');
             }
         });
-    }
-    function createPaginationSort(totalPages) {
-        $('.paginator').empty(); // Очищаем контейнер для пагинации
-        for (let i = 1; i <= totalPages; i++) {
-            let pageButton = $('<button>').text(i).addClass('page-button');
-            if (i === currentPage) {
-                pageButton.prop('disabled', true); // Деактивируем кнопку текущей страницы
-            }
-            pageButton.on('click', function() {
-                currentPage = i; // Устанавливаем текущую страницу
-                loadOffersSortName(currentPage); // Загружаем предложения для текущей страницы
-            });
-            $('.paginator').append(pageButton); // Добавляем кнопку на страницу
-        }
     }
 
     // Функция сортировки по ID
@@ -226,26 +213,12 @@ $(document).ready(function() {
                     $('.main').append(offerHtml);
                 }
                 // Создаем кнопки для навигации по страницам
-                createPaginationSortID(res.totalPages);
+                createPagination(res.totalPages);
             },
             error: function() {
                 console.error('Ошибка при загрузке предложений');
             }
         });
-    }
-    function createPaginationSortID(totalPages) {
-        $('.paginator').empty(); // Очищаем контейнер для пагинации
-        for (let i = 1; i <= totalPages; i++) {
-            let pageButton = $('<button>').text(i).addClass('page-button');
-            if (i === currentPage) {
-                pageButton.prop('disabled', true); // Деактивируем кнопку текущей страницы
-            }
-            pageButton.on('click', function() {
-                currentPage = i; // Устанавливаем текущую страницу
-                loadOffersSortID(currentPage); // Загружаем предложения для текущей страницы
-            });
-            $('.paginator').append(pageButton); // Добавляем кнопку на страницу
-        }
     }
 
     // Фильтрация
@@ -263,49 +236,23 @@ $(document).ready(function() {
         loadOffersSortID(currentPage);
     })
 
+    function validateField(fieldId, placeholder) {
+        if ($(fieldId).val() != '') {
+            point++;
+            $(fieldId).addClass('black').removeClass('red');
+        } else {
+            $(fieldId).addClass('red').removeClass('black').attr('placeholder', placeholder);
+        }
+    }
+
     // Изменяем данные в БД и на странице
     $('#edit').on('click', function() {
-        let point = 0;
-        if ($('#edit_name').val() != '') {
-            point = point + 1;
-            $('#edit_name').addClass('black');
-            $('#name').removeClass('red');
-        }
-        else {
-            $('#edit_name').addClass('red');
-            $('#edit_name').removeClass('black');
-            $('#edit_name').attr('placeholder', 'Enter the name');
-        }
-        if ($('#edit_email').val() != '') {
-            point = point + 1;
-            $('#edit_email').addClass('black');
-            $('#edit_email').removeClass('red');
-        }
-        else {
-            $('#edit_email').addClass('red');
-            $('#edit_email').removeClass('black');
-            $('#edit_email').attr('placeholder', 'Enter the email');
-        }
-        if ($('#edit_phone').val() != '') {
-            point = point + 1;
-            $('#edit_phone').addClass('black');
-            $('#phone').removeClass('red');
-        }
-        else {
-            $('#edit_phone').addClass('red');
-            $('#edit_phone').removeClass('black');
-            $('#edit_phone').attr('placeholder', 'Enter the phone');
-        }
-        if ($('#edit_date').val() != '') {
-            point = point + 1;
-            $('#edit_date').addClass('black');
-            $('#edit_date').removeClass('red');
-        }
-        else {
-            $('#edit_date').addClass('red');
-            $('#edit_date').removeClass('black');
-            $('#edit_date').attr('placeholder', 'Enter the date');
-        }
+        point = 0;
+        validateField('#edit_name', 'Enter the name');
+        validateField('#edit_email', 'Enter the email');
+        validateField('#edit_phone', 'Enter the phone');
+        validateField('#edit_date', 'Enter the date');
+        console.log(point);
         if (point == 4) {
             $.ajax({
             url: 'index.php?r=my/edit',
@@ -340,38 +287,10 @@ $(document).ready(function() {
 
     // Создание нового оффера
     $('#post').on('click', function(event) {
-        let point = 0;
-        if ($('#name').val() != '') {
-            point = point + 1;
-            $('#name').addClass('black');
-            $('#name').removeClass('red');
-        }
-        else {
-            $('#name').addClass('red');
-            $('#name').removeClass('black');
-            $('#name').attr('placeholder', 'Enter the name');
-        }
-        if ($('#email').val() != '') {
-            point = point + 1;
-            $('#email').addClass('black');
-            $('#email').removeClass('red');
-        }
-        else {
-            $('#email').addClass('red');
-            $('#email').removeClass('black');
-            $('#email').attr('placeholder', 'Enter the email');
-        }
-        if ($('#phone').val() != '') {
-            point = point + 1;
-            $('#phone').addClass('black');
-            $('#phone').removeClass('red');
-        }
-        else {
-            $('#phone').addClass('red');
-            $('#phone').removeClass('black');
-            $('#phone').attr('placeholder', 'Enter the phone');
-        }
-        console.log(point);
+        point = 0;
+        validateField('#name', 'Enter the name');
+        validateField('#email', 'Enter the email');
+        validateField('#phone', 'Enter the phone');
         if (point == 3) {
             $.ajax({
                 url: 'index.php?r=my/add', // Укажите правильный URL

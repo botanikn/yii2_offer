@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <center><h1>Offers</h1></center>
+    <center><h1>OFFERS</h1></center>
     <div class="all">
         <div class="left">
             <div class="head">
@@ -47,7 +47,7 @@
             </div>
         </div>
         <div class="right">
-            <button class="create">Create an offer</buttom>
+            <button class="create">CREATE AN OFFER</buttom>
         </div>
     </div>
     <center>
@@ -63,7 +63,7 @@
         <div id="overlay"></div>
 
         <div id="edit_popup">
-            <h2>Измените данные</h2>
+            <h2>Enter the changes</h2>
                 <label for="edit_name">Offer Name:</label>
                 <input type="text" id="edit_name" required><br><br>
                 <label for="edit_email">Email:</label>
@@ -77,7 +77,7 @@
         </div>
 
         <div id="popup">
-            <h2>Введите данные</h2>
+            <h2>Offer creation</h2>
                 <label for="name">Offer Name:</label>
                 <input type="text" id="name" required><br><br>
                 <label for="email">Email:</label>
